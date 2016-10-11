@@ -67,9 +67,9 @@ Mod:Locales(
 function Mod:Setup()
 	name("Datascape", "Aileron & Visceralus", "Elemental Pairs")
 	trigger("ALL", {"Aileron","Visceralus"}, {"Aileron","Viszeralus"}, {"Ventemort","Visceralus"}, {continentId = 52, parentZoneId = 98, mapId = 119})
-	
-	unit("boss_air", true, 1, "af00ffff", "unit.boss_air")
-	unit("boss_life", true, 2, "af228b22", "unit.boss_life")
+
+	unit("boss_air", true, "af00ffff", "unit.boss_air", 1)
+	unit("boss_life", true, "af228b22", "unit.boss_life", 2)
 	
 	line("line_healthorb", true, "ff0000ff", 7, "label.healthorb")
 	

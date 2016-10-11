@@ -75,8 +75,8 @@ function Mod:Setup()
 	trigger("ALL", {"Aileron","Hydroflux"}, {"Aileron","Hydroflux"}, {"Ventemort","Hydroflux"}, {continentId = 52, parentZoneId = 98, mapId = 118 })
 	
 	--units
-	unit("boss_air", true, 1, "af00ffff", "unit.boss_air")
-	unit("boss_water", true, 2, "af1e90ff", "unit.boss_water")
+	unit("boss_air", true, "af00ffff", "unit.boss_air", 1)
+	unit("boss_water", true, "af1e90ff", "unit.boss_water", 2)
 	
 	--timers
 	timer("timer_midphase", true, nil, "label.midphase")

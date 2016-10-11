@@ -66,9 +66,9 @@ function Mod:Setup()
 	name("Datascape", "Mnemesis & Megalith", "Elemental Pairs")
 	trigger("ALL", {"Mnemesis","Megalith"}, {"Mnemesis","Megalith"}, {"Mnémésis","Mégalithe"}, {continentId = 52, parentZoneId = 98, mapId = 117})
 	
-	unit("boss_logic", true, 1, "afadff2f", "unit.boss_logic")
-	unit("boss_earth", true, 2, "afff932f", "unit.boss_earth")
-	unit("unit_pillar", true, 3, "afff0000", "unit.pillar")
+	unit("boss_logic", true, "afadff2f", "unit.boss_logic", 1)
+	unit("boss_earth", true, "afff932f", "unit.boss_earth", 2)
+	unit("unit_pillar", true, "afff0000", "unit.pillar", 3)
 	
 	--snake-stuff
 	line("line_snakemap", true, "ffff4500", 26, "label.snakemap")
