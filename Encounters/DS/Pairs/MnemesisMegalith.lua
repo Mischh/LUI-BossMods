@@ -44,8 +44,8 @@ Mod:Locales(
 	}, 
     {--[[frFR]] 
 		-- Unit names
-        ["unit.boss_logic"] = "Mnemesis",
-        ["unit.boss_earth"] = "Megalith",
+        ["unit.boss_logic"] = "Mnémésis",
+        ["unit.boss_earth"] = "Mégalithe",
 		["unit.snake"] = "e395- [Datascape] Logic Elemental - Snake Piece (invis unit)",
 		["unit.stone"] = "Affleurement d'obsidienne",
 		["unit.pillar"] = "Matrice cristalline",
@@ -64,7 +64,7 @@ Mod:Locales(
 
 function Mod:Setup()
 	name("Datascape", "Mnemesis & Megalith", "Elemental Pairs")
-	trigger("ALL", {"Mnemesis","Megalith"}, {"Mnemesis","Megalith"}, {"Mnemesis","Megalith"}, {continentId = 52, parentZoneId = 98, mapId = 117})
+	trigger("ALL", {"Mnemesis","Megalith"}, {"Mnemesis","Megalith"}, {"Mnémésis","Mégalithe"}, {continentId = 52, parentZoneId = 98, mapId = 117})
 	
 	unit("boss_logic", true, 1, "afadff2f", "unit.boss_logic")
 	unit("boss_earth", true, 2, "afff932f", "unit.boss_earth")

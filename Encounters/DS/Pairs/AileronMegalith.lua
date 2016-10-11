@@ -11,8 +11,16 @@ local Locales = {
         ["unit.boss_air"] = "Aileron",
         ["unit.boss_earth"] = "Megalith",
     },
-    ["deDE"] = {},
-    ["frFR"] = {},
+    ["deDE"] = {
+        -- Unit names
+        ["unit.boss_air"] = "Aileron",
+        ["unit.boss_earth"] = "Megalith",
+	},
+    ["frFR"] = {
+        -- Unit names
+        ["unit.boss_air"] = "Ventemort",
+        ["unit.boss_earth"] = "Mégalithe",
+	},
 }
 
 function Mod:new(o)
@@ -33,6 +41,8 @@ function Mod:new(o)
         },
         tNames = {
             ["enUS"] = {"Aileron","Megalith"},
+            ["deDE"] = {"Aileron","Megalith"},
+            ["frFR"] = {"Ventemort","Mégalithe"},
         },
     }
     self.run = false
