@@ -1,67 +1,52 @@
 require "Window"
 require "Apollo"
 
-local Mod = {}
 local LUI_BossMods = Apollo.GetAddon("LUI_BossMods")
-local Encounter = "VolatilityLattice"
+local Mod = LUI_BossMods:EncounterPrototype("VolatilityLattice")
 
-local Locales = {
-    ["enUS"] = {},
-    ["deDE"] = {},
-    ["frFR"] = {},
-}
+--Localize some of your Variables.
+--These will be accessible from self.L, NOT within Mod:Setup(), but everywhere else.
+Mod:Locales(
+    {--[[enUS]] 
+        -- Unit names
+		["unit.devourer"] = "Data Devourer",
+    },
+    {--[[deDE]] 
+		-- Unit names
+		["unit.devourer"] = "Datenverschlinger"
+	}, 
+    {--[[frFR]] 
+		-- Unit names
+		["unit.devourer"] = "Dévoreur de données",
+	}
+)
 
-function Mod:new(o)
-    o = o or {}
-    setmetatable(o, self)
-    self.__index = self
-    self.instance = "Datascape"
-    self.displayName = "Volatility Lattice"
-    self.tTrigger = {
-        tZones = {
-            [1] = {
-                continentId = 52,
-                parentZoneId = 98,
-                mapId = 116,
-            },
-        },
-    }
-    self.run = false
-    self.runtime = {}
-    self.config = {
-        enable = true,
-    }
-    return o
+function Mod:Setup()
+	name("Datascape", "Volatility Lattice")
+	
+	trigger("ALL", {}, {}, {}, {continentId = 52, parentZoneId = 98, mapId = 116})
+	
+	line("line_devourer", true, "ff0000ff", 7, "label.devourer")
 end
 
-function Mod:Init(parent)
-    Apollo.LinkAddon(parent, self)
-
-    self.core = parent
-    self.L = parent:GetLocale(Encounter,Locales)
+function Mod:SetupEvents()
+	onUnitCreated("DevourerSpawned", self.L["unit.devourer"])
+	onUnitCreated("DevourerDespawned", self.L["unit.devourer"])
 end
 
-function Mod:OnUnitCreated(nId, tUnit, sName, bInCombat)
-    if not self.run == true then
-        return
-    end
+function Mod:OnStart()
+	print("lattice")
 end
 
-function Mod:IsRunning()
-    return self.run
+function Mod:OnEnd()
+	print("endlattice")
 end
 
-function Mod:IsEnabled()
-    return self.config.enable
+function Mod:DevourerSpawned(nId, tUnit, sName, bInCombat)
+	self:DrawLineBetween("line_devourer", tUnit, nil, nil, nil, nId)
 end
 
-function Mod:OnEnable()
-    self.run = true
+function Mod:DevourerDespawned(nId, tUnit, sName, bInCombat)
 end
 
-function Mod:OnDisable()
-    self.run = false
-end
-
-local ModInst = Mod:new()
-LUI_BossMods.modules[Encounter] = ModInst
+Mod:new() --THIS IS IMPORTANT DONT FORGET! (This should be one of the last lines in every encounter.)

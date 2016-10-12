@@ -1,71 +1,80 @@
 require "Window"
 require "Apollo"
 
-local Mod = {}
 local LUI_BossMods = Apollo.GetAddon("LUI_BossMods")
-local Encounter = "Kuralak"
+local Mod = LUI_BossMods:EncounterPrototype("Kuralak")
 
-local Locales = {
-    ["enUS"] = {},
-    ["deDE"] = {},
-    ["frFR"] = {},
-}
+--Localize some of your Variables.
+--These will be accessible from self.L, NOT within Mod:Setup(), but everywhere else.
+Mod:Locales(
+    {--[[enUS]] 
+        -- Unit names
+        ["unit.kuralak"] = "Kuralak the Defiler",
+		["msg.kuralak_returns"] = "Kuralak the Defiler returns to the Archive Core",
+		
+		["label.vanish"] = "Vanish",
+		["label.egg"] = "Eggs",
+    },
+    {--[[deDE]] 
+		-- Unit names
+        ["unit.kuralak"] = "Kuralak die Schänderin",
+		["msg.kuralak_returns"] = "Kuralak die Schänderin kehrt zum Archivkern zurück, um wieder zu Kräften zu kommen.",
+		
+		["label.vanish"] = "Verstecken",
+		["label.egg"] = "Eier",
+	}, 
+    {--[[frFR]] 
+		-- Unit names
+        ["unit.kuralak"] = "Kuralak la Profanatrice",
+		["msg.kuralak_returns"] = "Kuralak la Profanatrice retourne au Noyau d'accès aux archives pour reprendre des forces",
+		
+		
+		["label.vanish"] = "Vanish",
+		["label.egg"] = "Eggs",
+	}
+)
+local DEBUFFID_CHROMOSOME_CORRUPTION = 56652
 
-function Mod:new(o)
-    o = o or {}
-    setmetatable(o, self)
-    self.__index = self
-    self.instance = "Genetic Archives"
-    self.displayName = "Kuralak"
-    self.tTrigger = {
-        sType = "ANY",
-        tZones = {
-            [1] = {
-                continentId = 67,
-                parentZoneId = 147,
-                mapId = 148,
-            },
-        },
-        tNames = {
-            ["enUS"] = {"Kuralak the Defiler"},
-        },
-    }
-    self.run = false
-    self.runtime = {}
-    self.config = {
-        enable = true,
-    }
-    return o
+function Mod:Setup()
+	name("Genetic Archives", "Kuralak")
+	trigger("ALL", {"Kuralak the Defiler"}, {"Kuralak die Schänderin"}, {"Kuralak la Profanatrice"}, {continentId = 67, parentZoneId = 147, mapId = 148})
+	
+	unit("kuralak", true, nil, "unit.kuralak", 1)
+	timer("timer_vanish", true, nil, "label.vanish", false, false, 1)
+	icon("icon_egg", true, "target", 30, "ffff0000", "label.egg", 1)
 end
 
-function Mod:Init(parent)
-    Apollo.LinkAddon(parent, self)
-
-    self.core = parent
-    self.L = parent:GetLocale(Encounter,Locales)
+function Mod:SetupEvents()
+	onUnitCreated("BossCreated", self.L["unit.kuralak"], true)
+	onUnitDestroyed("BossDestroyed", self.L["unit.kuralak"])
+	
+	onDatachron("Vanish_Msg", self.L["msg.kuralak_returns"])
+	
+	onBuffAdded("EggAdded", nil, nil, DEBUFFID_CHROMOSOME_CORRUPTION)
+	
 end
 
-function Mod:OnUnitCreated(nId, tUnit, sName, bInCombat)
-    if not self.run == true then
-        return
-    end
+function Mod:OnStart()
 end
 
-function Mod:IsRunning()
-    return self.run
+function Mod:OnEnd()
 end
 
-function Mod:IsEnabled()
-    return self.config.enable
+function Mod:BossCreated(nId, tUnit, sName, bInCombat)
+	self:AddUnit("kuralak", tUnit, false, false, false)
 end
 
-function Mod:OnEnable()
-    self.run = true
+function Mod:BossDestroyed(nId, tUnit, sName)
+	self:RemoveUnit("kuralak")
 end
 
-function Mod:OnDisable()
-    self.run = false
+function Mod:Vanish_Msg()
+	self:AddTimer("timer_vanish", 47)
 end
 
-local ModInst = Mod:new()
-LUI_BossMods.modules[Encounter] = ModInst
+function Mod:EggAdded(nId, nSpellId, sName, tData, sUnitName, nStack, nDuration)
+	self:DrawIcon("icon_egg", tData.tUnit, 40, nil, nil, nId)
+end
+
+
+Mod:new()
