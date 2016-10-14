@@ -11,8 +11,16 @@ local Locales = {
         ["unit.boss_logic"] = "Mnemesis",
         ["unit.boss_life"] = "Visceralus",
     },
-    ["deDE"] = {},
-    ["frFR"] = {},
+    ["deDE"] = {
+		-- Unit names
+        ["unit.boss_logic"] = "Mnemesis",
+        ["unit.boss_life"] = "Viszeralus",
+	},
+    ["frFR"] = {
+		-- Unit names
+        ["unit.boss_logic"] = "Mnémésis",
+        ["unit.boss_life"] = "Visceralus",
+	},
 }
 
 function Mod:new(o)
@@ -33,6 +41,8 @@ function Mod:new(o)
         },
         tNames = {
             ["enUS"] = {"Mnemesis","Visceralus"},
+            ["deDE"] = {"Mnemesis","Viszeralus"},
+            ["frFR"] = {"Mnémésis","Visceralus"},
         },
     }
     self.run = false

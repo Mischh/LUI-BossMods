@@ -11,8 +11,16 @@ local Locales = {
         ["unit.boss_fire"] = "Pyrobane",
         ["unit.boss_life"] = "Visceralus",
     },
-    ["deDE"] = {},
-    ["frFR"] = {},
+    ["deDE"] = {
+		-- Unit names
+        ["unit.boss_fire"] = "Pyroman",
+        ["unit.boss_life"] = "Viszeralus",
+	},
+    ["frFR"] = {
+		-- Unit names
+        ["unit.boss_fire"] = "Pyromagnus",
+        ["unit.boss_life"] = "Visceralus",
+	},
 }
 
 function Mod:new(o)
@@ -33,6 +41,8 @@ function Mod:new(o)
         },
         tNames = {
             ["enUS"] = {"Pyrobane","Visceralus"},
+            ["deDE"] = {"Pyroman","Viszeralus"},
+            ["frFR"] = {"Pyromagnus","Visceralus"},
         },
     }
     self.run = false

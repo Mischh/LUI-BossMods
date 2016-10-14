@@ -11,8 +11,16 @@ local Locales = {
         ["unit.boss_fire"] = "Pyrobane",
         ["unit.boss_earth"] = "Megalith",
     },
-    ["deDE"] = {},
-    ["frFR"] = {},
+    ["deDE"] = {
+		-- Unit names
+        ["unit.boss_fire"] = "Pyroman",
+        ["unit.boss_earth"] = "Megalith",
+	},
+    ["frFR"] = {
+		-- Unit names
+        ["unit.boss_fire"] = "Pyromagnus",
+        ["unit.boss_earth"] = "Mégalithe",
+	},
 }
 
 function Mod:new(o)
@@ -33,6 +41,8 @@ function Mod:new(o)
         },
         tNames = {
             ["enUS"] = {"Pyrobane","Megalith"},
+            ["deDE"] = {"Pyroman","Megalith"},
+            ["frFR"] = {"Pyromagnus","Mégalithe"},
         },
     }
     self.run = false

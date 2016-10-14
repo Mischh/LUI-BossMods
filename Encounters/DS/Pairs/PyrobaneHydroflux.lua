@@ -20,8 +20,16 @@ local Locales = {
         ["label.ice_tomb"] = "Ice Tomb",
         ["label.flame_waves"] = "Flame Waves",
     },
-    ["deDE"] = {},
-    ["frFR"] = {},
+    ["deDE"] = {
+		-- Unit names
+        ["unit.boss_fire"] = "Pyroman",
+        ["unit.boss_water"] = "Hydroflux",
+	},
+    ["frFR"] = {
+		-- Unit names
+        ["unit.boss_fire"] = "Pyromagnus",
+        ["unit.boss_water"] = "Hydroflux",
+	},
 }
 
 local nLastBombTime = 0
@@ -38,7 +46,7 @@ function Mod:new(o)
     self.displayName = "Pyrobane & Hydroflux"
     self.groupName = "Elemental Pairs"
     self.tTrigger = {
-        sType = "ANY",
+        sType = "ALL",
         tZones = {
             [1] = {
                 continentId = 52,
@@ -48,6 +56,8 @@ function Mod:new(o)
         },
         tNames = {
             ["enUS"] = {"Pyrobane","Hydroflux"},
+            ["deDE"] = {"Pyroman","Hydroflux"},
+            ["frFR"] = {"Pyromagnus","Hydroflux"},
         },
     }
     self.run = false

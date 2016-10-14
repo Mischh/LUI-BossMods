@@ -11,8 +11,16 @@ local Locales = {
         ["unit.boss_air"] = "Aileron",
         ["unit.boss_water"] = "Hydroflux",
     },
-    ["deDE"] = {},
-    ["frFR"] = {},
+    ["deDE"] = {
+		-- Unit names
+        ["unit.boss_air"] = "Aileron",
+        ["unit.boss_water"] = "Hydroflux",
+	},
+    ["frFR"] = {
+		-- Unit names
+        ["unit.boss_air"] = "Ventemort",
+        ["unit.boss_water"] = "Hydroflux",
+	},
 }
 
 function Mod:new(o)
@@ -33,6 +41,8 @@ function Mod:new(o)
         },
         tNames = {
             ["enUS"] = {"Aileron","Hydroflux"},
+            ["deDE"] = {"Aileron","Hydroflux"},
+            ["frFR"] = {"Ventemort","Hydroflux"},
         },
     }
     self.run = false

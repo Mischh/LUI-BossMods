@@ -11,8 +11,16 @@ local Locales = {
         ["unit.boss_logic"] = "Mnemesis",
         ["unit.boss_earth"] = "Megalith",
     },
-    ["deDE"] = {},
-    ["frFR"] = {},
+    ["deDE"] = {
+		-- Unit names
+        ["unit.boss_logic"] = "Mnemesis",
+        ["unit.boss_earth"] = "Megalith",
+	},
+    ["frFR"] = {
+		-- Unit names
+        ["unit.boss_logic"] = "Mnémésis",
+        ["unit.boss_earth"] = "Mégalithe",
+	},
 }
 
 function Mod:new(o)
@@ -33,6 +41,8 @@ function Mod:new(o)
         },
         tNames = {
             ["enUS"] = {"Mnemesis","Megalith"},
+            ["deDE"] = {"Mnemesis","Megalith"},
+            ["frFR"] = {"Mnémésis","Mégalithe"},
         },
     }
     self.run = false
