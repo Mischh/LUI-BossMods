@@ -21,7 +21,6 @@ Mod:Locales(
 		["boss/portal.blue"] = "Infinite Logic Loop",
 		["boss/portal.red"] = "Excessive Force Protocol",
 		
-		
 		["label.portals"] = "Portals",
 		["label.gungrid"] = "Gungrid",
     },
@@ -30,13 +29,12 @@ Mod:Locales(
         ["unit.avatus"] = "Avatus",
 		["unit.gridcannon"] = "Holokanone",
 		["boss/portal.green"] = "Unaufhaltbare Objektsimulation",
-		["boss/portal.yellow"] = "Mobius' Physikkonstrukteur",
+		["boss/portal.yellow"] = "Mobius"..string.char(226,128,153).." Physikkonstrukteur",
 		["boss/portal.blue"] = "Unendliche Logikschleife",
 		["boss/portal.red"] = "Überzogene Gewaltprotokolle",
 		
 		["The Excessive Force Protocol's protective barrier has fallen."] = "Die Barriere des Überzogenen Gewaltprotokolls ist gefallen.",
 		["The Excessive Force Protocol has been terminated."] = "Das Überzogene Gewaltprotokoll wurde terminiert.",
-		
 		
 		["label.portals"] = "Portale",
 		["label.gungrid"] = "Gungrid",
@@ -50,7 +48,6 @@ Mod:Locales(
 		["boss/portal.blue"] = "Boucle de logique infinie",
 		["boss/portal.red"] = "Protocole de force excessive",
 		
-		
 		["label.portals"] = "Portals",
 		["label.gungrid"] = "Gungrid",
 	}
@@ -59,7 +56,7 @@ Mod:Locales(
 function Mod:Setup()
 	name("Datascape", "Avatus")
 	trigger("ALL", {"Avatus"}, {"Avatus"}, {"Avatus"}, {continentId = 52, parentZoneId = 98, mapId = 104})
-	unit("boss_avatus", true, 1, nil, "unit.avatus")
+	unit("boss_avatus", true, nil, "unit.avatus", 1)
 	
 	-- line("line_twirltotomb", true, "ff0f0f0f", 7, "Twirl to Tomb")
 	line("line_portals", true, false, 7, "label.portals")
@@ -71,12 +68,12 @@ function Mod:SetupEvents()
 	onUnitDestroyed("AvatusRemoved", self.L["unit.avatus"])
 	
 	onUnitCreated("BossPortalSpawned_Green", self.L["boss/portal.green"])
-	onUnitCreated("BossPortalSpawned_Yellow")
+	onUnitCreated("BossPortalSpawned_Yellow", self.L["boss/portal.yellow"])
 	onUnitCreated("BossPortalSpawned_Blue", self.L["boss/portal.blue"])
 	onUnitCreated("BossPortalSpawned_Red", self.L["boss/portal.red"])
 	
 	onUnitDestroyed("PotentialPortalDespawned", self.L["boss/portal.green"])
-	onUnitDestroyed("PotentialPortalDespawned")
+	onUnitDestroyed("PotentialPortalDespawned", self.L["boss/portal.yellow"])
 	onUnitDestroyed("PotentialPortalDespawned", self.L["boss/portal.blue"])
 	onUnitDestroyed("PotentialPortalDespawned", self.L["boss/portal.red"])
 	
@@ -93,7 +90,6 @@ function Mod:AvatusRemoved(nId, tUnit, sName)
 end
 
 function Mod:BossPortalSpawned_Green(nId, tUnit, sName, bInCombat)
-print(sName)
 	if tUnit:GetHealth() then
 	else --the portal
 		self:DrawLineBetween("line_portals", tUnit, nil, nil, nil, nId, nil, portalColor.green)
@@ -101,13 +97,6 @@ print(sName)
 end
 
 function Mod:BossPortalSpawned_Yellow(nId, tUnit, sName, bInCombat)
-	local x = sName:match("Mobius(.+)")
-	if x then
-		print(string.byte(x,1,20))
-	else
-		return
-	end
-	
 	if tUnit:GetHealth() then
 	else --the portal
 		self:DrawLineBetween("line_portals", tUnit, nil, nil, nil, nId, nil, portalColor.yellow)
