@@ -275,7 +275,7 @@ function Mod:SnakeBuffApplied(nId, nSpellId, sName, tData, sUnitName, nStack, nD
 	self:UpdateSnakeLines(true)
 end
 
-function Mod:CastStrart_Defrag(nId, sCastName, tCast, sName, nDuration)
+function Mod:CastStart_Defrag(nId, sCastName, tCast, sName, nDuration)
 	self:ShowCast("cast_defrag", tCast)
 	self:AddTimer("timer_defrag", 40)
 end
