@@ -261,7 +261,7 @@ function Mod:SnakeBuffApplied(nId, nSpellId, sName, tData, sUnitName, nStack, nD
 	local tUnit = tData.tUnit	
 	
 	self:HideAura("aura_youtarget", false) --dont trigger SnakeBuffTimeout
-	self:HideIcon("icon_target", false)
+	self:RemoveIcon("icon_target")
 	
 	if tUnit:IsThePlayer() then
 		self:ShowAura("aura_youtarget", nDuration, true, nil, nil, nil, self.SnakeBuffTimeout) --after nDuration, call SnakeBuffTimeout
