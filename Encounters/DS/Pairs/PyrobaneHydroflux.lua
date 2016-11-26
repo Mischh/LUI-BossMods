@@ -252,7 +252,7 @@ end
 
 function Mod:OnBuffRemoved(nId, nSpellId, sName, tData, sUnitName)
     if nSpellId == DEBUFF_FIREBOMB or nSpellId == DEBUFF_FROSTBOMB then
-		self.core:RemoveIcon(nId)
+		self.core:RemovePixie(nId)
 		if tData.tUnit:IsThePlayer() then
 			for id, key in pairs(tBombLines) do
 				self.core:RemoveLineBetween(key)
